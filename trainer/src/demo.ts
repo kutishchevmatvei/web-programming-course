@@ -93,6 +93,10 @@ const oneAnswerProgress = calculateProgress(trainingSet, answers);
 const fullProgress = calculateProgress(trainingSet, completedAnswers);
 const unknownTaskProgress = calculateProgress(trainingSet, answersWithUnknownTask);
 const emptyProgress = calculateProgress(emptySet, []);
+const differentTaskProgress = calculateProgress(
+    { ...trainingSet, tasks: [trainingSet.tasks[1]!] },
+    answers,
+);
 const whitespaceProgress = calculateProgress(
     { ...trainingSet, tasks: [trainingSet.tasks[1]!] },
     [{ taskId: "react-1", kind: "short-text", text: "   " }],
@@ -113,6 +117,10 @@ verify(
 verify(
     unknownTaskProgress.answered === 2,
     "ответ для неизвестного задания не влияет на прогресс",
+);
+verify(
+    differentTaskProgress.answered === 0 && differentTaskProgress.total === 1,
+    "ответ на другое задание не засчитывается для текущего задания",
 );
 verify(
     emptyProgress.answered === 0 && emptyProgress.total === 0,
