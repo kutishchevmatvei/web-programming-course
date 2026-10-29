@@ -16,10 +16,19 @@ a {
     font: inherit;
 }
 
+button {
+    color: inherit;
+}
+
 button:focus-visible,
 a:focus-visible {
     outline: 2px solid #315db5;
     outline-offset: 3px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
 }
 
 .app-shell {
@@ -163,6 +172,7 @@ a:focus-visible {
 .task-button-copy {
     display: grid;
     gap: 3px;
+    min-width: 0;
 }
 
 .task-button-topic {
@@ -174,13 +184,43 @@ a:focus-visible {
     font-size: 14px;
 }
 
-.task-chevron {
-    margin-left: auto;
-    color: #315db5;
+.task-status {
+    color: #666;
+    font-size: 12px;
+}
+
+.task-status.is-complete {
+    color: #27623b;
 }
 
 .detail-panel {
     min-height: 280px;
+}
+
+.progress-section {
+    margin-bottom: 20px;
+}
+
+.progress-copy {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+    color: #555;
+    font-size: 14px;
+}
+
+.progress-section progress {
+    display: block;
+    width: 100%;
+    height: 12px;
+    accent-color: #315db5;
+}
+
+.question-count {
+    margin: 0 0 12px;
+    color: #666;
+    font-size: 14px;
 }
 
 .task-card-meta {
@@ -213,9 +253,22 @@ a:focus-visible {
 .options-list {
     display: grid;
     gap: 8px;
-    margin: 20px 0 0;
+    margin: 0;
     padding: 0;
     list-style: none;
+}
+
+.answer-fieldset {
+    min-width: 0;
+    margin: 20px 0 0;
+    padding: 0;
+    border: 0;
+}
+
+.answer-fieldset legend {
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 14px;
 }
 
 .option {
@@ -224,14 +277,145 @@ a:focus-visible {
     align-items: center;
     padding: 10px;
     border: 1px solid #ccc;
+    cursor: pointer;
 }
 
-.option-marker {
-    width: 14px;
-    height: 14px;
-    flex: 0 0 14px;
-    border: 1px solid #777;
-    border-radius: 50%;
+.option input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #315db5;
+    flex: 0 0 16px;
+}
+
+.option:has(input:checked) {
+    border-color: #315db5;
+    background: #eef3fc;
+}
+
+.text-answer-label {
+    display: grid;
+    gap: 8px;
+    margin-top: 20px;
+    color: #555;
+}
+
+.text-answer-label textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 0;
+    color: #222;
+    font: inherit;
+    resize: vertical;
+}
+
+.text-answer-label textarea:focus-visible {
+    outline: 2px solid #315db5;
+    outline-offset: 2px;
+}
+
+.task-navigation,
+.finish-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.task-navigation button,
+.skipped-section button {
+    padding: 8px 12px;
+    border: 1px solid #aaa;
+    background: #fff;
+    cursor: pointer;
+}
+
+.task-navigation button:hover:not(:disabled),
+.skipped-section button:hover {
+    background: #f1f1f1;
+}
+
+.skipped-section {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.skipped-section h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.skipped-section ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.primary-button {
+    padding: 10px 16px;
+    border: 1px solid #315db5;
+    background: #315db5;
+    color: #fff;
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    background: #264b94;
+}
+
+.submitted-view {
+    padding: 24px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.submitted-view > h2 {
+    margin: 6px 0;
+    font-size: 24px;
+}
+
+.submitted-view > p:not(.eyebrow) {
+    margin: 0;
+    color: #555;
+}
+
+.review-list {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0;
+    padding-left: 24px;
+}
+
+.review-item {
+    padding: 14px;
+    border: 1px solid #ccc;
+}
+
+.review-topic {
+    color: #315db5;
+    font-size: 13px;
+}
+
+.review-item h3 {
+    margin: 6px 0;
+    font-size: 16px;
+}
+
+.review-item p {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.review-item p.is-unanswered {
+    color: #666;
 }
 
 .text-task-note,

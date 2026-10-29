@@ -55,13 +55,19 @@ export function filterTasksByTopic(trainingSet: TrainingSet, topic: string): Tas
     return trainingSet.tasks.filter((task) => task.topic.includes(topic));
 }
 
+export function isAnswered(answer: Answer | undefined): boolean {
+    return answer !== undefined && (
+        answer.kind === "single-choice" || answer.text.trim() !== ""
+    );
+}
+
 export function calculateProgress(trainingSet: TrainingSet, answers: Answer[]): Progress {
     let answered = 0;
 
     for (const task of trainingSet.tasks) {
         const answer = answers.find((item) => item.taskId === task.id);
 
-        if (answer && (answer.kind === "single-choice" || answer.text.trim() !== "")) {
+        if (isAnswered(answer)) {
             answered += 1;
         }
     }
